@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'users/index'
+
+  get 'users/create'
+
   get 'user/index'
 
   get 'user/create'
