@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get '/users/index' => 'users#index'
   get 'users/create'
+  get '/login' => 'users#login'
 
 
 
