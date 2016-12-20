@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def index
-    @user = User.new
+    
+  end
+
   end
 
   def create
@@ -44,23 +46,21 @@ class UsersController < ApplicationController
 
   def yelp
     parameters = { term: 'food', limit: 20 }
-
-    # coordinates = {latitude:params[:lat], longitude:params[:long]}
-    coordinates = {latitude:37.763945, longitude:-122.468449}
-    @result = Yelp.client.search_by_coordinates(coordinates, parameters)
-
-    # render json: Yelp.client.search('San Francisco', parameters)
+    if session[:coords] != nil
+      coordinates = {latitude:session[:coords][0], longitude:session[:coords][1]}
+      @result = Yelp.client.search_by_coordinates(coordinates, parameters)
   end
 
 
   def somewhere
     puts "**********"
     puts params[:address]
-    coords = Geocoder.coordinates(params[:address])
-    puts coords[0]
-    puts coords[1]
+    session[:coords] = Geocoder.coordinates(params[:address])
+    puts session[:coords][0]
+    puts session[:coords][1]
     puts "**********"
-    redirect_to :back
+    redirect_to '/users'
+end
 
   def logout
     reset_session
