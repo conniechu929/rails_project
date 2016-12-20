@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
   get '/yelp' => 'users#yelp'
+  post '/yelp' => 'users#search'
+
 
   post '/somewhere' => 'users#somewhere'
 
 
+
+  get '/users/index' => 'users#index'
+
   get 'users/create'
+  get '/login' => 'users#login'
 
-  get 'user/index'
 
-  get 'user/create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

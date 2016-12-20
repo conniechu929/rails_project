@@ -9,7 +9,15 @@
   <%= javascript_include_tag "tooltipster/dist/js/tooltipster.bundle.min.js" => true %>
   <%= csrf_meta_tags %>
 </head>
-
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('.tooltip').tooltipster();
+      // $(".masthead clearfix").click(function(e) {
+      //       e.preventDefault();
+      //       $("nav").toggleClass(".nav masthead-nav");
+      // });
+  });
+</script>
   <%= yield %>
 </body>
 </html>
