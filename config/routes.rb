@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   post '/yelp' => 'users#search'
 
 
+  get '/' => 'users#index'
+  
   post '/somewhere' => 'users#somewhere'
 
-
-
-  get '/users/index' => 'users#index'
+  get '/users' => 'users#index'
 
   get 'users/create'
   get '/login' => 'users#login'

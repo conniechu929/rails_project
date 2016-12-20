@@ -6,17 +6,29 @@
   var autocomplete = new google.maps.places.Autocomplete(input);
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 921301cdef4dcf8c3e1bc786056f5a582ed83f86
   google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 
 <form class="" action="/somewhere" method="post">
   <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+<<<<<<< HEAD
   <input style='color:black' type="text" id="address" name="address" placeholder="Enter Your Address">
   <input style='color:black' type="submit" name="" value="Find Places">
 </form>
 
 <div>
+=======
+  <input type="text" style='color:black' id="address" name="address" placeholder="Enter Your Address">
+  <input type="submit" style='color:black' name="" value="Find Places">
+</form>
+<!-- <div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div> -->
+>>>>>>> 921301cdef4dcf8c3e1bc786056f5a582ed83f86
 
 
   <div id="map">
