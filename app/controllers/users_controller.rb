@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @user = User.new
+
   end
 
   def create
@@ -61,7 +61,8 @@ class UsersController < ApplicationController
     puts coords[1]
     puts "**********"
     redirect_to :back
-
+  end
+  
   def logout
     reset_session
     redirect_to "/"
