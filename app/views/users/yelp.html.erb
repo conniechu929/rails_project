@@ -4,7 +4,20 @@
 <!-- <div style='width: 800px;'>
   <div id="map" style='width: 800px; height: 400px;'></div>
 </div> -->
-<div class="">
-  <input id="searchTextField" class="controls" type="text" placeholder="Enter Your Address">
-  <div id="map"></div>
+<div>
+  <form action="/yelp" method="post">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <input style='color:black' id="searchTextField" class="controls" type="text" name="" placeholder="Enter Your Address">
+    <input style='color:black' type="submit" value="Start Your Search">
+  </form>
+
+  <div id="map">
+    <% @result.businesses.each do |result| %>
+      <h4><%= result.name %></h4> <%= result.location.display_address[0] %>, <%= result.location.display_address[1] %>, <%= result.location.display_address[2] %></p>
+    <% end %>
+    </div>
+
+    <% @result.businesses.each do |result| %>
+      <img src="<%= result.image_url %>" width='200px' height='200px'/>
+    <% end %>
 </div>
