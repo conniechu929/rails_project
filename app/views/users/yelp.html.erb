@@ -1,10 +1,16 @@
 <h1>SEARCH IS HERE</h1>
-<%= javascript_include_tag('searchBar.js')%>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBvqhkHYLtDUACs1-h21pKFwMVcYTFsXdg"></script>
+<script type="text/javascript">
+  function initialize() {
+  var input = document.getElementById('address');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  }
 
-<!-- <div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
-</div> -->
-<div class="">
-  <input id="searchTextField" class="controls" type="text" placeholder="Enter Your Address">
-  <div id="map"></div>
-</div>
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<form class="" action="/somewhere" method="post">
+  <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+  <input type="text" id="address" name="address" placeholder="Enter Your Address">
+  <input type="submit" name="" value="Find Places">
+</form>

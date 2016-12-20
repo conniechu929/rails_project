@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   get '/yelp' => 'users#yelp'
 
+  post '/somewhere' => 'users#somewhere'
+
+
   get 'users/create'
 
   get 'user/index'

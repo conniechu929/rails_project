@@ -10,4 +10,14 @@ class UsersController < ApplicationController
 
     # render json: Yelp.client.search('San Francisco', parameters)
   end
+
+  def somewhere
+    puts "**********"
+    puts params[:address]
+    coords = Geocoder.coordinates(params[:address])
+    puts coords[0]
+    puts coords[1]
+    puts "**********"
+    redirect_to :back
+  end
 end
