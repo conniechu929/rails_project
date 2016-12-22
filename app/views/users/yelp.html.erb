@@ -6,25 +6,22 @@
   var autocomplete = new google.maps.places.Autocomplete(input);
   }
   google.maps.event.addDomListener(window, 'load', initialize);
+
+
 </script>
 
 <form class="" action="/somewhere" method="post">
   <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-  <input type="text" style='color:black' id="address" name="address" placeholder="Enter Your Address">
-  <input type="submit" style='color:black' name="" value="Find Places">
+  <input style='color:black' type="text" id="address" name="address" placeholder="Enter Your Address">
+  <input style='color:black' type="submit" name="" value="Find Places">
 </form>
-<!-- <div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
-</div> -->
 
-
+<div>
   <div id="map">
-    <% @result.businesses.each do |result| %>
-      <h4><%= result.name %></h4> <%= result.location.display_address[0] %>, <%= result.location.display_address[1] %>, <%= result.location.display_address[2] %></p>
-    <% end %>
+
     </div>
 
-    <% @result.businesses.each do |result| %>
-      <img src="<%= result.image_url %>" width='200px' height='200px'/>
-    <% end %>
+    <hr>
+    <img src="<%= @random %>" width='800px' height='800px'/>
+
 </div>

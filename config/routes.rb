@@ -2,9 +2,8 @@ Rails.application.routes.draw do
   get '/yelp' => 'users#yelp'
   post '/yelp' => 'users#search'
 
-
   get '/' => 'users#index'
-  
+
   post '/somewhere' => 'users#somewhere'
 
   get '/users' => 'users#index'
