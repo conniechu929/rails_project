@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
   def index
 
-
-  end
-
   end
 
   def create
@@ -46,28 +43,49 @@ class UsersController < ApplicationController
   end
 
   def yelp
-    parameters = { term: 'food', limit: 20 }
+
+    term = { term: 'food'}
+    # params = { term: 'food', limit: 20}
     if session[:coords] != nil
-      coordinates = {latitude:session[:coords][0], longitude:session[:coords][1]}
-      @result = Yelp.client.search_by_coordinates(coordinates, parameters)
+      location = {latitude:session[:coords][0], longitude:session[:coords][1]}
+      # coordinates = {latitude:session[:coords][0], longitude:session[:coords][1]}
+      # @results = Yelp.client.search_by_coordinates(coordinates, params)
+
+      @results = search(term, location)
+
+      # @images = []
+      # @results.businesses.each do |result|
+      #   business(result.id)["photos"].each do |photo|
+      #     @images.push(photo)
+      #   end
+      # end
+      # @results["businesses"].each do |result|
+      #   business(result["id"])["photos"].each do |photo|
+      #     @images.push(photo)
+      #   end
+      # end
+      # @limit = @results["businesses"].take(20)
+      @ids =[]
+      @results["businesses"].each do |result|
+        @ids.push(result["id"])
+      end
+
+      @id = @ids.shuffle
+
+      @photos = []
+      business = business(@id[0])["photos"]
+      @photos.push(business)
+
+      @photo = @photos[0].shuffle
+      @random = @photo[0]
+
     end
   end
 
-
   def somewhere
-    puts "**********"
-    puts params[:address]
     session[:coords] = Geocoder.coordinates(params[:address])
-    puts session[:coords][0]
-    puts session[:coords][1]
-    puts "**********"
-
-    redirect_to :back
+    redirect_to '/yelp'
   end
-
-
-    redirect_to '/users'
-end
 
   def logout
     reset_session
@@ -77,6 +95,5 @@ end
   private
   def user_params
     params.require(:user).permit(:name, :email, :password)
-
   end
 end
