@@ -2,21 +2,15 @@
 <html>
 <head>
   <title>RailsProject</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= stylesheet_link_tag    "tooltipster/dist/css/tooltipster.bundle.min.css" => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag "http://code.jquery.com/jquery-1.10.0.min.js" => true %>
-  <%= javascript_include_tag "tooltipster/dist/js/tooltipster.bundle.min.js" => true %>
+  <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" => true %>
   <%= csrf_meta_tags %>
 </head>
 <script type="text/javascript">
-  $(document).ready(function() {
-      $('.tooltip').tooltipster();
-      // $(".masthead clearfix").click(function(e) {
-      //       e.preventDefault();
-      //       $("nav").toggleClass(".nav masthead-nav");
-      // });
-  });
 </script>
   <%= yield %>
 </body>

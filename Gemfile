@@ -39,8 +39,8 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'yelp', require: 'yelp'
-gem 'bootstrap-sass', '~> 3.3.6'
-gem 'sass-rails', '>= 3.2'
+gem 'bootstrap-sass'
+gem 'sass-rails'
 gem 'autoprefixer-rails'
 gem 'geocoder'
 # Use unicorn as the app server

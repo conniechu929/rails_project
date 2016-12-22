@@ -1,32 +1,117 @@
 <body>
-  <div class="site-wrapper">
 
-    <div class="site-wrapper-inner">
+<nav class="navbar navbar-inverse" style="background-color: red">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a id="lol" data-toggle="collapse" href="#collapse1"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 
-      <div class="cover-container">
 
-        <div class="masthead clearfix">
-          <div class="inner">
-            <h3 class="masthead-brand">Food Finder</h3>
-            <nav>
-              <ul class="nav masthead-nav">
-                <li><a href="/login">Sign In</a></li>
-                <li><a href="">Register</a></li>
-              </ul>
-            </nav>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid text-center" id="mainDiv">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+
+    <div class="col-sm-8 text-left">
+      <div id="searchDiv" >
+        <h3>What do you wanna eat today?</h1>
+        <form class="" action="/somewhere" method="post">
+          <div class="input-group">
+            <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
+            <input type="text" class="form-control" id="address" name="address" placeholder="Enter Your Address">
+            <span class="input-group-btn">
+              <input type="submit" class='btn' value="Find Places Around">
+            </span>
           </div>
-        </div>
-
-        <div class="inner cover">
-          <h1 class="cover-heading">Welcome</h1>
-          <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-          <p class="lead">
-            <a href="#" class="btn btn-lg btn-default">Learn more</a>
-          </p>
-        </div>
-
+        </form>
       </div>
+    </div>
 
+    <div class="col-sm-2 sidenav">
+      <div id="collapse1" class="collapse">
+
+        <form  id='login' class="form-horizontal" action="/login" method="post">
+            <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
+
+            <div class="group-form">
+              <label for="email">Email:</label>
+              <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+            </div>
+
+            <div class="group-form" >
+              <label for="password">Password:</label>
+              <input type="text" class="form-control" name="password" id="password" placeholder="Password">
+            </div>
+            <div class="btn">
+              <input type="submit" value="Login">
+            </div><hr>
+            <a id="anker" href="#">Haven't registered yet? Click here!</a>
+        </form>
+
+
+        <form  id='register' class='form-horizontal' action='/register' method='post'>
+            <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
+
+            <div class='group-form'>
+              <label for='name'>Name:</label>
+              <input type='text' class='form-control' name='name' id='name' placeholder='Name'>
+            </div>
+
+            <div class='group-form'>
+              <label for='email'>Email:</label>
+              <input type='text' class='form-control' name='email' id='email' placeholder='Email'>
+            </div>
+
+            <div class='group-form' >
+              <label for='password'>Password:</label>
+              <input type='text' class='form-control' name='password' id='password' placeholder='Password'>
+            </div>
+
+            <div class='group-form' >
+              <label for='password'>Confirm Password:</label>
+              <input type='text' class='form-control' name='password_conf' id='password_conf' placeholder='Confirm Password'>
+            </div>
+
+            <div class='btn'>
+              <input type='submit' value='Register'>
+            </div><hr>
+            <a id='anker' href='#'>Already have an account? Click here!</a>
+        </form>
+
+
+
+
+
+    </div>
+    <div id="register">
+
+    </div>
     </div>
 
   </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>OLOLO</p>
+</footer>
+
+</body>
+</html>
