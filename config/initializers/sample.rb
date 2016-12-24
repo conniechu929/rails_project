@@ -97,7 +97,9 @@ def search(term, location)
       latitude: location[:latitude],
       longitude:location[:longitude],
     # },
-    limit: 20
+    categories: term[:categories],
+    limit: 5,
+    radius: 4000
   }
   response = HTTP.auth(bearer_token).get(url, params: params)
   response.parse

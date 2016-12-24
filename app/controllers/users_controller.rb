@@ -43,8 +43,8 @@ class UsersController < ApplicationController
   end
 
   def yelp
-
-    term = { term: 'food'}
+    searchterms = ['food', 'restaurant', 'american', 'asian-fusion', 'asian', 'japanese', 'italian', 'mexican', 'chinese', 'vietnamese', 'korean', 'bbq', 'french', 'german','russian', 'indian'].shuffle
+    term = { term: searchterms[0]}
     # params = { term: 'food', limit: 20}
     if session[:coords] != nil
       location = {latitude:session[:coords][0], longitude:session[:coords][1]}
@@ -65,20 +65,25 @@ class UsersController < ApplicationController
       #   end
       # end
       # @limit = @results["businesses"].take(20)
-      @ids =[]
+
+      session[:business_id] =[]
       @results["businesses"].each do |result|
-        @ids.push(result["id"])
+        session[:business_id].push(result["id"])
       end
+      puts session[:business_id]
 
-      @id = @ids.shuffle
+      @id = session[:business_id].shuffle
 
-      @photos = []
-      business = business(@id[0])["photos"]
-      @photos.push(business)
+      session[:photos] = []
+      # @photos = []
+      @business = business(@id[0])
 
-      @photo = @photos[0].shuffle
-      @random = @photo[0]
+      photo = @business["photos"]
+      session[:photos].push(photo)
 
+      @randphoto = session[:photos][0].shuffle
+      @random = @randphoto[0]
+      # reset_session
     end
   end
 
