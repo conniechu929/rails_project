@@ -16,7 +16,7 @@
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a id="lol" data-toggle="collapse" href="#collapse1"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a id="login" data-toggle="collapse" href="#collapse1"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 
 
 
@@ -47,33 +47,8 @@
 
     <div class="col-sm-2 sidenav">
       <div id="collapse1" class="collapse">
-
-        <form  id='login' class="form-horizontal" action="/login" method="post">
+        <form class='form-horizontal' action='/login' method='post'>
             <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
-
-            <div class="group-form">
-              <label for="email">Email:</label>
-              <input type="text" class="form-control" name="email" id="email" placeholder="Email">
-            </div>
-
-            <div class="group-form" >
-              <label for="password">Password:</label>
-              <input type="text" class="form-control" name="password" id="password" placeholder="Password">
-            </div>
-            <div class="btn">
-              <input type="submit" value="Login">
-            </div><hr>
-            <a id="anker" href="#">Haven't registered yet? Click here!</a>
-        </form>
-
-
-        <form  id='register' class='form-horizontal' action='/register' method='post'>
-            <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
-
-            <div class='group-form'>
-              <label for='name'>Name:</label>
-              <input type='text' class='form-control' name='name' id='name' placeholder='Name'>
-            </div>
 
             <div class='group-form'>
               <label for='email'>Email:</label>
@@ -84,26 +59,38 @@
               <label for='password'>Password:</label>
               <input type='text' class='form-control' name='password' id='password' placeholder='Password'>
             </div>
-
-            <div class='group-form' >
-              <label for='password'>Confirm Password:</label>
-              <input type='text' class='form-control' name='password_conf' id='password_conf' placeholder='Confirm Password'>
-            </div>
-
             <div class='btn'>
-              <input type='submit' value='Register'>
+              <input type='submit' value='Login'>
             </div><hr>
-            <a id='anker' href='#'>Already have an account? Click here!</a>
+            <a data-toggle="collapse" id="loginanker" href="#collapse2" >Haven't registered yet? Click here!</a>
         </form>
+      </div>
 
-
-
-
-
-    </div>
-    <div id="register">
-
-    </div>
+      <div id="collapse2" class="collapse">
+         <form   class='form-horizontal' action='/register' method='post'>
+           <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
+          <div class='group-form'>
+            <label for='name'>Name:</label>
+            <input type='text' class='form-control' name='name' id='name' placeholder='Name'>
+          </div>
+          <div class='group-form'>
+            <label for='email'>Email:</label>
+            <input type='text' class='form-control' name='email' id='email' placeholder='Email'>
+          </div>
+          <div class='group-form' >
+            <label for='password'>Password:</label>
+            <input type='text' class='form-control' name='password' id='password' placeholder='Password'>
+          </div>
+          <div class='group-form' >
+            <label for='confirm_password'>Confirm Password:</label>
+            <input type='text' class='form-control' name=‘confirm_password' id=‘confirm_password' placeholder='Confirm Password'>
+          </div>
+          <div class='btn'>
+            <input type='submit' value='Register'>
+          </div><hr>
+          <a data-toggle="collapse" id="registeranker" href="#collapse2">Already Registered? Click here to login!</a>
+      </form>
+      </div>
     </div>
 
   </div>
