@@ -87,9 +87,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def map
+    # location = {latitude:session[:coords][0], longitude:session[:coords][1]}
+    puts "***********"
+    puts session[:address]
+    puts "***********"
+  end
+
   def somewhere
+    session[:address] = params[:address]
     session[:coords] = Geocoder.coordinates(params[:address])
-    redirect_to '/yelp'
+    redirect_to '/map'
   end
 
   def logout

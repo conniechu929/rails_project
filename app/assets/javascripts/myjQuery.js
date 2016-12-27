@@ -1,32 +1,15 @@
-function ajaxContent1(){
-    $('#bodyContentDiv').fadeOut(500, ajaxCall1);
-    $('#bodyContentDiv').fadeIn(500);
-}
-
-function ajaxContent2(){
-    // $( "#login" ).fadeToggle( "slow", "linear" );
-    $("input[name='web_form_submit']").click(function(){
-   $('#example_box').arcticmodal();
-});
-
-}
-
 $(document).ready(function(){
-  $("#anker").click(function(){
-    $('#collapse1').fadeOut(500, ajaxCall2);
-    $('#collapse1').fadeIn(500);
-  });
+    // $("#login").click(function(){
+    //   $("#content").append("<div class=‘container'><div class=‘login'><form  id='login' class='form-horizontal' action='/login' method='post'><input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'><div class='group-form'><label for='email'>Email:</label><input type='text' class='form-control' name='email' id='email' placeholder='Email'></div> <div class='group-form' ><label for='password'>Password:</label><input type='text' class='form-control' name='password' id='password' placeholder='Password'></div><div class='btn'><input type='submit' value='Login'></div><hr><a id='loginanker'>Haven't registered yet? Click here!</a></form></div> <div hidden class=‘registration'>asdasdasdasd</div></div>");
+    //   console.log('APPENDED');
+    // });
+     $(document).on('click', '#loginanker', function(){
+       $( "#login" ).trigger( "click" );
+       console.log("OLOLO1");
+     });
+
+     $(document).on('click', '#registeranker', function(){
+       $( "#login" ).trigger( "click" );
+       console.log("OLOLO2");
+     });
 })
-
-
-// function replace1(){
-//     $("#login").replaceWith("SDSDSFSD");
-// }
-//
-function ajaxCall1() {
-    $('#bodyContentDiv').html('Content1');
-}
-
-function ajaxCall2() {
-     $('#register').append("<form  id='register' class='form-horizontal' action='/register' method='post'><input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'><div class='group-form'><label for='name'>Name:</label><input type='text' class='form-control' name='name' id='name' placeholder='Name'></div><div class='group-form'></form>");
-}
