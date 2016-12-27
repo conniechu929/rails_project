@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   end
 
   def yelp
-    searchterms = ['food', 'restaurant', 'american', 'asian-fusion', 'asian', 'japanese', 'italian', 'mexican', 'chinese', 'vietnamese', 'korean', 'bbq', 'french', 'german','russian', 'indian'].shuffle
+    searchterms = ['food', 'restaurant', 'american', 'asian-fusion', 'asian', 'japanese', 'italian', 'mexican', 'chinese', 'vietnamese', 'korean', 'bbq', 'french', 'german','russian', 'indian', 'seafood'].shuffle
     term = { term: searchterms[0]}
     # params = { term: 'food', limit: 20}
     if session[:coords] != nil
