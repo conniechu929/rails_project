@@ -45,7 +45,7 @@ gem 'bootstrap-sass'
 gem 'sass-rails'
 gem 'autoprefixer-rails'
 gem 'geocoder'
-
+gem 'activerecord-session_store'
 source "https://rubygems.org"
 
 gem "http"

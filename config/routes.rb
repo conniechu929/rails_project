@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'users/create'
   get '/login' => 'users#login'
 
+  get '/map' => 'users#map'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
