@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/' => 'users#index'
   get '/yelp' => 'users#yelp'
   post '/yelp' => 'users#search'
   post '/create' => 'users#create'
@@ -8,7 +9,6 @@ Rails.application.routes.draw do
   post '/somewhere' => 'users#somewhere'
 
   get '/users' => 'users#index'
-  get 'users/create'
 
   get '/map' => 'users#map'
 

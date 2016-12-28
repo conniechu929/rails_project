@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_login, except: [:index, :create, :login]
+  before_action :require_login, except: [:index, :create, :login, :somewhere]
   def index
 
   end
@@ -37,6 +37,8 @@ class UsersController < ApplicationController
     end
   end
 
+
+
   def yelp
     location = {latitude:session[:coords][0], longitude:session[:coords][1]}
     searchterms = ['food', 'american', 'asian-fusion', 'asian', 'japanese', 'italian', 'mexican', 'chinese', 'vietnamese', 'korean', 'bbq', 'french', 'german','russian', 'indian', 'seafood'].shuffle
@@ -62,10 +64,7 @@ class UsersController < ApplicationController
       puts session[:photos]
 
       @randphoto = session[:photos][0].shuffle
-
-      if !session[:photos].include? (@randphoto)
-        @random = @randphoto[0]
-      end
+      @random = @randphoto[0]
 
       # if session[:bus_id]
       #   session[:business_id].delete(session[:bus_id])
@@ -102,16 +101,15 @@ class UsersController < ApplicationController
 
 
   def somewhere
-
-    session[:address] = params[:address]
-    session[:coords] = Geocoder.coordinates(params[:address])
-
     if session[:user_id].nil?
+      puts "***********"
+      puts "OLOLO"
+      puts "***********"
       redirect_to '/', flash: { login: true }
     else
       session[:address] = params[:address]
       session[:coords] = Geocoder.coordinates(params[:address])
-      redirect_to '/map'
+      redirect_to '/yelp'
     end
   end
 
