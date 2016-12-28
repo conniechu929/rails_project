@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
   get '/yelp' => 'users#yelp'
   post '/yelp' => 'users#search'
-
+  post '/create' => 'users#create'
   get '/' => 'users#index'
-
+  post '/login' => 'users#login'
+  post '/logout' => 'users#logout'
   post '/somewhere' => 'users#somewhere'
 
   get '/users' => 'users#index'
   get 'users/create'
-  get '/login' => 'users#login'
 
   get '/map' => 'users#map'
 
