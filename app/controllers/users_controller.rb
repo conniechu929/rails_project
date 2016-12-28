@@ -51,49 +51,33 @@ class UsersController < ApplicationController
       # coordinates = {latitude:session[:coords][0], longitude:session[:coords][1]}
       # @results = Yelp.client.search_by_coordinates(coordinates, params)
 
-      @results = search(term, location)
+        @results = search(term, location)
 
-      # @images = []
-      # @results.businesses.each do |result|
-      #   business(result.id)["photos"].each do |photo|
-      #     @images.push(photo)
-      #   end
-      # end
-      # @results["businesses"].each do |result|
-      #   business(result["id"])["photos"].each do |photo|
-      #     @images.push(photo)
-      #   end
-      # end
-      # @limit = @results["businesses"].take(20)
+        session[:business_ids] =[]
+        @results["businesses"].each do |result|
+          session[:business_ids].push(result["id"])
+        end
+        puts session[:business_ids]
 
-      session[:business_id] =[]
-      @results["businesses"].each do |result|
-        session[:business_id].push(result["id"])
-      end
-      puts session[:business_id]
+        session[:business_ids].shuffle
 
-      @id = session[:business_id].shuffle
+        session[:photos] = []
+        @business = business(session[:business_ids][0])
+        session[:photos].push(@business["photos"])
+        puts "********"
+        puts session[:photos]
+        puts "********"
 
-      session[:photos] = []
-      @business = business(@id[0])
-
-      photo = @business["photos"]
-      # photocount = 0
-      session[:photos].push(photo)
-
-      puts session[:photos]
-
-      @randphoto = session[:photos][0].shuffle
-
-      if !session[:photos].include? (@randphoto)
-        @random = @randphoto[0]
-      end
-
+        @randphotos = session[:photos][0].shuffle
+        @random = @randphotos[0]
+        puts "********"
+        puts @randphotos
+        puts "********"
+    end
       # if session[:bus_id]
       #   session[:business_id].delete(session[:bus_id])
       # end
       # reset_session
-    end
   end
 
   def swipe
@@ -101,25 +85,30 @@ class UsersController < ApplicationController
       session[:destination] = params[:destination]
       redirect_to '/map'
     else
-      session[:discard] = params[:discard]
-      session[:bus_id] = params[:bus_id]
-      @business_count = []
-      @business_count.push(session[:bus_id])
+      session[:bus_id] = []
+      session[:bus_id].push(params[:bus_id])
 
-      if @business_count.count(session[:bus_id]) == 3
-        session[:bus_id]
-        redirect_to '/yelp'
+      session[:photos].each do |photos|
+        puts params[:discard]
+        puts "*********"
+        puts photos
+        if photos.include?(params[:discard])
+          photos.delete(params[:discard])
+          puts "*~*~*~*~*~*~*~"
+          puts photos
+          puts "*~*~*~*~*~*~*~"
+        end
       end
+      # if @business_count.count(session[:bus_id]) == 3
+      #   session[:bus_id]
+      #   redirect_to '/yelp'
+      # end
       redirect_to '/yelp'
     end
 
   end
 
   def map
-    # location = {latitude:session[:coords][0], longitude:session[:coords][1]}
-    # puts "***********"
-    # puts session[:address]
-    # puts "***********"
   end
 
 
@@ -128,13 +117,13 @@ class UsersController < ApplicationController
     session[:address] = params[:address]
     session[:coords] = Geocoder.coordinates(params[:address])
 
-    if session[:user_id].nil?
-      redirect_to '/', flash: { login: true }
-    else
+    # if session[:user_id].nil?
+    #   redirect_to '/', flash: { login: true }
+    # else
       session[:address] = params[:address]
       session[:coords] = Geocoder.coordinates(params[:address])
-      redirect_to '/map'
-    end
+      redirect_to '/yelp'
+    # end
   end
 
   def logout

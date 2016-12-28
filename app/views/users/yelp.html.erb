@@ -2,7 +2,7 @@
 
 <div>
     <hr>
-    <% if session[:business_id] != nil %>
+    <% if session[:business_ids] != nil%>
     <img src="<%= @random %>" width='800px' height='800px'/>
     <h1><%= @business["name"]%></h1>
     <h3><%= @business["location"]["address1"]%>, <%= @business["location"]["city"]%></h3>
