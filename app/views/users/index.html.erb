@@ -9,32 +9,6 @@
 
 
   </script>
-
-<nav class="navbar navbar-inverse" style="background-color: red">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a id="login" data-toggle="collapse" href="#collapse1"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-
-
-
-      </ul>
-    </div>
-  </div>
-</nav>
-
 <div class="container-fluid text-center" id="mainDiv">
   <div class="row content">
     <div class="col-sm-2 sidenav">
@@ -72,7 +46,7 @@
             <div class='btn'>
               <input type='submit' value='Login'>
             </div><hr>
-            <a data-toggle="collapse" id="loginanker" href="#collapse2" >Haven't registered yet? Click here!</a>
+            <a data-toggle="collapse" id="loginanker">Haven't registered yet? Click here!</a>
         </form>
       </div>
 
@@ -98,7 +72,7 @@
           <div class='btn'>
             <input type='submit' value='Register'>
           </div><hr>
-          <a data-toggle="collapse" id="registeranker" href="#collapse2">Already Registered? Click here to login!</a>
+          <a data-toggle="collapse" id="registeranker" >Already Registered? Click here to login!</a>
       </form>
       </div>
     </div>
@@ -106,9 +80,59 @@
   </div>
 </div>
 
-<footer class="container-fluid text-center">
-  <p>OLOLO</p>
-</footer>
+
+
+<% if flash[:login] %>
+  <button hidden id="myBtn">Open Button</button>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Please Login/Register before proceed</h2>
+      <form class='form-horizontal' action='/login' method='post' id="loginform">
+          <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
+
+          <div class='group-form'>
+            <label for='email'>Email:</label>
+            <input type='text' class='form-control' name='email' id='email' placeholder='Email'>
+          </div>
+
+          <div class='group-form' >
+            <label for='password'>Password:</label>
+            <input type='text' class='form-control' name='password' id='password' placeholder='Password'>
+          </div>
+          <div class='btn'>
+            <input type='submit' value='Login'>
+          </div><hr>
+          <a id="modalloginanker">Haven't registered yet? Click here!</a>
+      </form>
+      <form  hidden class='form-horizontal' action='/register' method='post' id="registerform">
+        <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
+       <div class='group-form'>
+         <label for='name'>Name:</label>
+         <input type='text' class='form-control' name='name' id='name' placeholder='Name'>
+       </div>
+       <div class='group-form'>
+         <label for='email'>Email:</label>
+         <input type='text' class='form-control' name='email' id='email' placeholder='Email'>
+       </div>
+       <div class='group-form' >
+         <label for='password'>Password:</label>
+         <input type='text' class='form-control' name='password' id='password' placeholder='Password'>
+       </div>
+       <div class='group-form' >
+         <label for='confirm_password'>Confirm Password:</label>
+         <input type='text' class='form-control' name=‘confirm_password' id=‘confirm_password' placeholder='Confirm Password'>
+       </div>
+       <div class='btn'>
+         <input type='submit' value='Register'>
+       </div><hr>
+       <a id="modalregisteranker" >Already Registered? Click here to login!</a>
+   </form>
+    </div>
+  </div>
+<%end%>
+
+
 
 </body>
 </html>
