@@ -7,13 +7,12 @@ Rails.application.routes.draw do
   post '/somewhere' => 'users#somewhere'
 
   get '/users' => 'users#index'
-
   get 'users/create'
   get '/login' => 'users#login'
 
   get '/map' => 'users#map'
 
-
+  post '/swipe' => 'users#swipe'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

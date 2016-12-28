@@ -43,11 +43,11 @@ class UsersController < ApplicationController
   end
 
   def yelp
-    searchterms = ['food', 'restaurant', 'american', 'asian-fusion', 'asian', 'japanese', 'italian', 'mexican', 'chinese', 'vietnamese', 'korean', 'bbq', 'french', 'german','russian', 'indian', 'seafood'].shuffle
-    term = { term: searchterms[0]}
-    # params = { term: 'food', limit: 20}
+    location = {latitude:session[:coords][0], longitude:session[:coords][1]}
+    searchterms = ['food', 'american', 'asian-fusion', 'asian', 'japanese', 'italian', 'mexican', 'chinese', 'vietnamese', 'korean', 'bbq', 'french', 'german','russian', 'indian', 'seafood'].shuffle
+    term = { term: searchterms[0], categories: 'food'}
+
     if session[:coords] != nil
-      location = {latitude:session[:coords][0], longitude:session[:coords][1]}
       # coordinates = {latitude:session[:coords][0], longitude:session[:coords][1]}
       # @results = Yelp.client.search_by_coordinates(coordinates, params)
 
@@ -75,16 +75,44 @@ class UsersController < ApplicationController
       @id = session[:business_id].shuffle
 
       session[:photos] = []
-      # @photos = []
       @business = business(@id[0])
 
       photo = @business["photos"]
+      # photocount = 0
       session[:photos].push(photo)
 
+      puts session[:photos]
+
       @randphoto = session[:photos][0].shuffle
-      @random = @randphoto[0]
+
+      if !session[:photos].include? (@randphoto)
+        @random = @randphoto[0]
+      end
+
+      # if session[:bus_id]
+      #   session[:business_id].delete(session[:bus_id])
+      # end
       # reset_session
     end
+  end
+
+  def swipe
+    if params[:like]
+      session[:destination] = params[:destination]
+      redirect_to '/map'
+    else
+      session[:discard] = params[:discard]
+      session[:bus_id] = params[:bus_id]
+      @business_count = []
+      @business_count.push(session[:bus_id])
+
+      if @business_count.count(session[:bus_id]) == 3
+        session[:bus_id]
+        redirect_to '/yelp'
+      end
+      redirect_to '/yelp'
+    end
+
   end
 
   def map
@@ -94,10 +122,11 @@ class UsersController < ApplicationController
     puts "***********"
   end
 
+
   def somewhere
     session[:address] = params[:address]
     session[:coords] = Geocoder.coordinates(params[:address])
-    redirect_to '/map'
+    redirect_to '/yelp'
   end
 
   def logout

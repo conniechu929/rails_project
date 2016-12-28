@@ -1,13 +1,18 @@
+<h1>SEARCH IS HERE</h1>
 
 <div>
-  <div id="map">
-
-    </div>
-
     <hr>
     <% if session[:business_id] != nil %>
     <img src="<%= @random %>" width='800px' height='800px'/>
     <h1><%= @business["name"]%></h1>
-    <h3><%= @business["location"]["address1"]%></h3>
+    <h3><%= @business["location"]["address1"]%>, <%= @business["location"]["city"]%></h3>
     <% end %>
+    <form action="/swipe" method="post">
+      <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <input type="hidden" name="destination" value="<%= @business["location"]["address1"]%><%= @business["location"]["city"]%>">
+      <input type="hidden" name="discard" value="<%= @random %>">
+      <input type="hidden" name="bus_id" value="<%= @business["id"] %>">
+      <input type="submit" name="dislike" value="Dislike">
+      <input type="submit" name="like" value="Like!">
+    </form>
 </div>

@@ -1,5 +1,5 @@
 <iframe width="700" height="500" frameborder="0" style="border:0"
- src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCQKeK4rYw0Bc4Lc_skolKTdBpcKWImXjU&origin=<%= session[:address] %>&destination=150+Font+blvd+San_Francisco+CA&avoid=tolls|highways"
+ src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCQKeK4rYw0Bc4Lc_skolKTdBpcKWImXjU&origin=<%= session[:address] %>&destination=<%= session[:destination] %>&avoid=tolls|highways"
  allowfullscreen>
 </iframe>
 <h1><%= @lol %></h1>
