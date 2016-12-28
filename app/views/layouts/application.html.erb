@@ -10,6 +10,35 @@
   <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" => true %>
   <%= csrf_meta_tags %>
 </head>
+<body>
+  <nav class="navbar navbar-inverse" style="background-color: red">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Logo</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a id="login" data-toggle="collapse"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+
+
+        </ul>
+      </div>
+    </div>
+  </nav>
   <%= yield %>
+  <footer class="container-fluid text-center">
+    <p>OLOLO</p>
+  </footer>
+
 </body>
 </html>

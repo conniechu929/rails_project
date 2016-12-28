@@ -89,15 +89,19 @@ class UsersController < ApplicationController
 
   def map
     # location = {latitude:session[:coords][0], longitude:session[:coords][1]}
-    puts "***********"
-    puts session[:address]
-    puts "***********"
+    # puts "***********"
+    # puts session[:address]
+    # puts "***********"
   end
 
   def somewhere
-    session[:address] = params[:address]
-    session[:coords] = Geocoder.coordinates(params[:address])
-    redirect_to '/map'
+    if session[:user_id].nil?
+      redirect_to '/', flash: { login: true }
+    else
+      session[:address] = params[:address]
+      session[:coords] = Geocoder.coordinates(params[:address])
+      redirect_to '/map'
+    end
   end
 
   def logout
@@ -109,4 +113,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password)
   end
+
 end
