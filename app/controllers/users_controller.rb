@@ -1,46 +1,43 @@
 class UsersController < ApplicationController
+  before_action :require_login, except: [:index, :create, :login, :somewhere]
   def index
 
   end
 
   def create
-    if params[:user][:name].to_s == '' || params[:user][:email].to_s == '' || params[:user][:password].to_s == '' && params[:user][:password] != params[:user][:password_confirmation]
-      flash[:create_error] = "Fields can't be blank"
-      flash[:error] = "Passwords do not match"
-      redirect_to "/"
-    elsif params[:user][:name].to_s == '' || params[:user][:email].to_s == '' || params[:user][:password].to_s == '' || params[:user][:password_confirmation].to_s == ''
-      flash[:create_error] = "Fields can't be blank"
-      redirect_to '/'
-    elsif params[:user][:password] != params[:user][:password_confirmation]
-      flash[:error] = "Passwords do not match"
-      redirect_to '/'
-    elsif params[:user][:password].length < 8
-      flash[:error] = "Password is too short"
-      redirect_to '/'
-    else
-      if params[:user][:password] == params[:user][:password_confirmation]
-        @user = User.create(user_params)
+    @user = User.create(user_params)
+      if @user.errors.any?
+        flash[:register_errors] = []
+        @user.errors.full_messages.each do |message|
+            if flash[:register_errors].include?(message) == false
+              flash[:register_errors].push(message)
+            end
+        end
+        redirect_to :back
+      else
         session[:user_id] = @user.id
-        redirect_to "/yelp"
+        redirect_to :back
       end
-    end
   end
 
   def login
     @user = User.find_by_email(params[:user][:email])
+    flash[:register_errors] = []
     if User.find_by_email(params[:user][:email]).nil?
-      flash[:noemail] = "Email does not exist"
-      redirect_to "/"
+      flash[:register_errors].push("Email does not exist")
+      redirect_to :back
     else
       if @user.authenticate(params[:user][:password]) == false
-        flash[:error] = "Invalid"
-        redirect_to "/"
+        flash[:register_errors].push("Invalid password")
+        redirect_to :back
       else
         session[:user_id] = @user.id
-        redirect_to "/yelp"
+        redirect_to :back
       end
     end
   end
+
+
 
   def yelp
     location = {latitude:session[:coords][0], longitude:session[:coords][1]}
@@ -48,8 +45,6 @@ class UsersController < ApplicationController
     term = { term: searchterms[0], categories: 'food'}
 
     if session[:coords] != nil
-      # coordinates = {latitude:session[:coords][0], longitude:session[:coords][1]}
-      # @results = Yelp.client.search_by_coordinates(coordinates, params)
 
         @results = search(term, location)
 
@@ -113,17 +108,27 @@ class UsersController < ApplicationController
 
 
   def somewhere
-
     session[:address] = params[:address]
     session[:coords] = Geocoder.coordinates(params[:address])
 
-    # if session[:user_id].nil?
-    #   redirect_to '/', flash: { login: true }
-    # else
+    if session[:user_id].nil?
+      redirect_to '/', flash: { login: true }
+    else
       session[:address] = params[:address]
       session[:coords] = Geocoder.coordinates(params[:address])
       redirect_to '/yelp'
-    # end
+    end
+
+    if session[:user_id].nil?
+      puts "***********"
+      puts "OLOLO"
+      puts "***********"
+      redirect_to '/', flash: { login: true }
+    else
+      session[:address] = params[:address]
+      session[:coords] = Geocoder.coordinates(params[:address])
+      redirect_to '/yelp'
+    end
   end
 
   def logout
@@ -133,7 +138,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
 end

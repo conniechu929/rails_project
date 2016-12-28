@@ -6,12 +6,16 @@
     var autocomplete = new google.maps.places.Autocomplete(input);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
-
-
   </script>
+
 <div class="container-fluid text-center" id="mainDiv">
   <div class="row content">
     <div class="col-sm-2 sidenav">
+      <% if flash[:register_errors] %>
+        <% flash[:register_errors].each do |error| %>
+          <p class="alert"><%= error %></p>
+        <% end %>
+      <% end %>
     </div>
 
     <div class="col-sm-8 text-left">
@@ -31,108 +35,57 @@
 
     <div class="col-sm-2 sidenav">
       <div id="collapse1" class="collapse">
-        <form class='form-horizontal' action='/login' method='post'>
+          <% if flash[:error] %>
+            <p><%= flash[:login] %></p>
+          <% end %>
+          <form class='form-horizontal' action='/login' method='post'>
             <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
 
             <div class='group-form'>
               <label for='email'>Email:</label>
-              <input type='text' class='form-control' name='email' id='email' placeholder='Email'>
+              <input type='text' class='form-control' name='user[email]' id='email' placeholder='Email'>
             </div>
 
             <div class='group-form' >
               <label for='password'>Password:</label>
-              <input type='text' class='form-control' name='password' id='password' placeholder='Password'>
+              <input type='text' class='form-control' name='user[password]' id='password' placeholder='Password'>
             </div>
             <div class='btn'>
               <input type='submit' value='Login'>
             </div><hr>
             <a data-toggle="collapse" id="loginanker">Haven't registered yet? Click here!</a>
-        </form>
+          </form>
       </div>
 
       <div id="collapse2" class="collapse">
-         <form   class='form-horizontal' action='/register' method='post'>
+
+         <form   class='form-horizontal' action='/create' method='post'>
            <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
           <div class='group-form'>
             <label for='name'>Name:</label>
-            <input type='text' class='form-control' name='name' id='name' placeholder='Name'>
+            <input type='text' class='form-control' name='user[name]' id='name' placeholder='Name'>
           </div>
           <div class='group-form'>
             <label for='email'>Email:</label>
-            <input type='text' class='form-control' name='email' id='email' placeholder='Email'>
+            <input type='text' class='form-control' name='user[email]' id='email' placeholder='Email'>
           </div>
           <div class='group-form' >
             <label for='password'>Password:</label>
-            <input type='text' class='form-control' name='password' id='password' placeholder='Password'>
+            <input type='text' class='form-control' name='user[password]' id='password' placeholder='Password'>
           </div>
           <div class='group-form' >
             <label for='confirm_password'>Confirm Password:</label>
-            <input type='text' class='form-control' name=‘confirm_password' id=‘confirm_password' placeholder='Confirm Password'>
+            <input type='text' class='form-control' name='user[password_confirmation]' id='confirm_password' placeholder='Confirm  Password'>
           </div>
           <div class='btn'>
             <input type='submit' value='Register'>
           </div><hr>
           <a data-toggle="collapse" id="registeranker" >Already Registered? Click here to login!</a>
-      </form>
+        </form>
       </div>
     </div>
-
   </div>
 </div>
-
-
-
-<% if flash[:login] %>
-  <button hidden id="myBtn">Open Button</button>
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Please Login/Register before proceed</h2>
-      <form class='form-horizontal' action='/login' method='post' id="loginform">
-          <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
-
-          <div class='group-form'>
-            <label for='email'>Email:</label>
-            <input type='text' class='form-control' name='email' id='email' placeholder='Email'>
-          </div>
-
-          <div class='group-form' >
-            <label for='password'>Password:</label>
-            <input type='text' class='form-control' name='password' id='password' placeholder='Password'>
-          </div>
-          <div class='btn'>
-            <input type='submit' value='Login'>
-          </div><hr>
-          <a id="modalloginanker">Haven't registered yet? Click here!</a>
-      </form>
-      <form  hidden class='form-horizontal' action='/register' method='post' id="registerform">
-        <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
-       <div class='group-form'>
-         <label for='name'>Name:</label>
-         <input type='text' class='form-control' name='name' id='name' placeholder='Name'>
-       </div>
-       <div class='group-form'>
-         <label for='email'>Email:</label>
-         <input type='text' class='form-control' name='email' id='email' placeholder='Email'>
-       </div>
-       <div class='group-form' >
-         <label for='password'>Password:</label>
-         <input type='text' class='form-control' name='password' id='password' placeholder='Password'>
-       </div>
-       <div class='group-form' >
-         <label for='confirm_password'>Confirm Password:</label>
-         <input type='text' class='form-control' name=‘confirm_password' id=‘confirm_password' placeholder='Confirm Password'>
-       </div>
-       <div class='btn'>
-         <input type='submit' value='Register'>
-       </div><hr>
-       <a id="modalregisteranker" >Already Registered? Click here to login!</a>
-   </form>
-    </div>
-  </div>
-<%end%>
-
-
 
 </body>
 </html>

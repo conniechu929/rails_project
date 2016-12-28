@@ -38,6 +38,13 @@ footer {
   margin-top: 20%;
 }
 
+.alert {
+  color: red;
+  font-weight: bold;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
 .modal {
   display: none;
   position: absolute;;

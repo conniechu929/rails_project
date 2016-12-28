@@ -40,15 +40,15 @@ $(document).ready(function(){
 
     $(document).on('click', '#modalloginanker', function(){
       if ($('#loginform').is(":visible")) {
-        $( "#loginform" ).hide();
-        $( "#registerform" ).show();
+        $( "#loginform" ).slideToggle(300);
+        $( "#registerform" ).slideToggle(500);
       }
     });
 
     $(document).on('click', '#modalregisteranker', function(){
       if ($('#registerform').is(":visible")) {
-        $( "#registerform" ).hide();
-        $( "#loginform" ).show();
+        $( "#registerform" ).slideToggle(300);
+        $( "#loginform" ).slideToggle(500);
       }
     });
 

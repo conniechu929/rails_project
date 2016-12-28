@@ -19,7 +19,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Logo</a>
+        <a class="navbar-brand" href="#"><img src="images/poop.png" width="40px" height="40px" alt=""></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
@@ -27,8 +27,15 @@
           <li><a href="#">Contact</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a id="login" data-toggle="collapse"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-
+          <% if current_user %>
+            <form action='/logout' method='post'>
+              <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+              <input type='hidden' name='id' value='<%= session[:user_id] %>'>
+              <li><span class="glyphicon glyphicon-log-out"><input type='submit' value='Log Out' ></span></li>
+            </form>
+          <% else %>
+            <li><a id="login" data-toggle="collapse"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <% end %>
 
 
         </ul>
@@ -40,5 +47,55 @@
     <p>OLOLO</p>
   </footer>
 
+
+  <% if flash[:login] %>
+    <button hidden id="myBtn">Open Button</button>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Please Login/Register before proceed</h2>
+        <form class='form-horizontal' action='/login' method='post' id="loginform">
+            <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
+
+            <div class='group-form'>
+              <label for='email'>Email:</label>
+              <input type='text' class='form-control' name='user[email]' id='email' placeholder='Email'>
+            </div>
+
+            <div class='group-form' >
+              <label for='password'>Password:</label>
+              <input type='text' class='form-control' name='user[password]' id='password' placeholder='Password'>
+            </div>
+            <div class='btn'>
+              <input type='submit' value='Login'>
+            </div><hr>
+            <a id="modalloginanker">Haven't registered yet? Click here!</a>
+        </form>
+        <form  hidden class='form-horizontal' action='/create' method='post' id="registerform">
+          <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
+         <div class='group-form'>
+           <label for='name'>Name:</label>
+           <input type='text' class='form-control' name='user[name]' id='name' placeholder='Name'>
+         </div>
+         <div class='group-form'>
+           <label for='email'>Email:</label>
+           <input type='text' class='form-control' name='user[email]' id='email' placeholder='Email'>
+         </div>
+         <div class='group-form' >
+           <label for='password'>Password:</label>
+           <input type='text' class='form-control' name='user[password]' id='password' placeholder='Password'>
+         </div>
+         <div class='group-form' >
+           <label for='confirm_password'>Confirm Password:</label>
+           <input type='text' class='form-control' name=‘user[confirm_password]' id=‘confirm_password' placeholder='Confirm Password'>
+         </div>
+         <div class='btn'>
+           <input type='submit' value='Register'>
+         </div><hr>
+         <a id="modalregisteranker" >Already Registered? Click here to login!</a>
+     </form>
+      </div>
+    </div>
+  <%end%>
 </body>
 </html>
