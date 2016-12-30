@@ -2,18 +2,14 @@
 
 <div>
     <hr>
-<<<<<<< HEAD
-    <% if session[:business_ids] != nil%>
-=======
     <% if session[:business_ids] != nil %>
->>>>>>> 49cc4c003cc92f0c59fe38d48c3b3f53e5566d90
     <img src="<%= @random %>" width='800px' height='800px'/>
     <h1><%= @business["name"]%></h1>
     <h3><%= @business["location"]["address1"]%>, <%= @business["location"]["city"]%></h3>
     <% end %>
     <form action="/swipe" method="post">
       <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
-      <input type="hidden" name="destination" value="<%= @business["location"]["address1"]%><%= @business["location"]["city"]%>">
+      <input type="hidden" name="destination" value="<%= @business["location"]["address1"]%><%= @business["location"]["address2"]%><%= @business["location"]["city"]%>">
       <input type="hidden" name="discard" value="<%= @random %>">
       <input type="hidden" name="bus_id" value="<%= @business["id"] %>">
       <input type="submit" name="dislike" value="Dislike">
