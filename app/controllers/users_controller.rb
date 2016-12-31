@@ -89,7 +89,7 @@ class UsersController < ApplicationController
         puts photos
         if photos.include?(params[:discard])
           photos.delete(params[:discard])
-          puts "*~*~*~*~*~*~*~"
+          puts "*~*~*~*~*~*~*~ "
           puts photos
           puts "*~*~*~*~*~*~*~"
         end
@@ -108,21 +108,7 @@ class UsersController < ApplicationController
 
 
   def somewhere
-    session[:address] = params[:address]
-    session[:coords] = Geocoder.coordinates(params[:address])
-
     if session[:user_id].nil?
-      redirect_to '/', flash: { login: true }
-    else
-      session[:address] = params[:address]
-      session[:coords] = Geocoder.coordinates(params[:address])
-      redirect_to '/yelp'
-    end
-
-    if session[:user_id].nil?
-      puts "***********"
-      puts "OLOLO"
-      puts "***********"
       redirect_to '/', flash: { login: true }
     else
       session[:address] = params[:address]
