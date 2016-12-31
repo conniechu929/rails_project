@@ -33,9 +33,13 @@ footer {
   }
   .row.content {height:auto;}
 }
+#mainDiv {
+  background-image: url("food3.jpg");
+}
 
 #searchDiv {
   margin-top: 20%;
+
 }
 
 .alert {
@@ -69,4 +73,33 @@ footer {
   float: right;
   font-size: 28px;
   font-weight: bold;
+}
+
+#image {
+  display: block;
+  margin-left: 20%;
+}
+
+#like-dislike {
+  margin-left: 45%;
+}
+
+#foodResult {
+  background: url('woodtable.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.dislike {
+  font-size: 30px;
+  width: 50px;
+  margin-left: 0%;
+}
+
+.like {
+  font-size: 30px;
+  width: 50px;
+  margin-left: 5%;
 }

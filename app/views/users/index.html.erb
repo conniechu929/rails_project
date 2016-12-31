@@ -19,8 +19,8 @@
     </div>
 
     <div class="col-sm-8 text-left">
-      <div id="searchDiv" >
-        <h3>What do you wanna eat today?</h1>
+      <div id="searchDiv">
+        <h3 style="font: 40px Copperplate, fantasy; color:white"><b>What's your location?</h1>
         <form class="" action="/somewhere" method="post">
           <div class="input-group">
             <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
@@ -48,7 +48,7 @@
 
             <div class='group-form' >
               <label for='password'>Password:</label>
-              <input type='text' class='form-control' name='user[password]' id='password' placeholder='Password'>
+              <input type='password' class='form-control' name='user[password]' id='password' placeholder='Password'>
             </div>
             <div class='btn'>
               <input type='submit' value='Login'>
@@ -71,11 +71,11 @@
           </div>
           <div class='group-form' >
             <label for='password'>Password:</label>
-            <input type='text' class='form-control' name='user[password]' id='password' placeholder='Password'>
+            <input type='password' class='form-control' name='user[password]' id='password' placeholder='Password'>
           </div>
           <div class='group-form' >
             <label for='confirm_password'>Confirm Password:</label>
-            <input type='text' class='form-control' name='user[password_confirmation]' id='confirm_password' placeholder='Confirm  Password'>
+            <input type='password' class='form-control' name='user[password_confirmation]' id='confirm_password' placeholder='Confirm  Password'>
           </div>
           <div class='btn'>
             <input type='submit' value='Register'>
