@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def yelp
+def yelp
      location = {latitude:session[:coords][0], longitude:session[:coords][1]}
      searchterms = ['food', 'american', 'asian-fusion', 'asian', 'japanese', 'italian', 'mexican', 'chinese', 'vietnamese', 'korean', 'bbq', 'french', 'german','russian', 'indian', 'seafood']
      r = Random.new
@@ -59,32 +59,6 @@ class UsersController < ApplicationController
 
          @randphotos = @business["photos"]
          @randphoto = @randphotos[r.rand(0..2)]
-  end
-  def swipe
-    if params[:like]
-      session[:destination] = params[:destination]
-      redirect_to '/map'
-    else
-      session[:bus_id] = []
-      session[:bus_id].push(params[:bus_id])
-
-      session[:photos].each do |photos|
-        puts params[:discard]
-        puts "*********"
-        puts photos
-        if photos.include?(params[:discard])
-          photos.delete(params[:discard])
-          puts "*~*~*~*~*~*~*~ "
-          puts photos
-          puts "*~*~*~*~*~*~*~"
-        end
-      end
-      # if @business_count.count(session[:bus_id]) == 3
-      #   session[:bus_id]
-      #   redirect_to '/yelp'
-      # end
-      redirect_to '/yelp'
-    end
 
        if @@discard_photos.include?(@randphoto)
          newrandphoto = @randphotos[r.rand(0..2)]
@@ -118,9 +92,6 @@ class UsersController < ApplicationController
        redirect_to '/yelp'
      end
    end
-
-  def map
-  end
 
   def somewhere
     if session[:user_id].nil?
