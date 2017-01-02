@@ -18,6 +18,11 @@ $(document).ready(function(){
     }
   });
 
+  $(document).on('click', '#home', function(){
+    location.reload();
+    console.log('OLOLO');
+  });
+
   if(login){
     var modal = document.getElementById("myModal");
     var btn = document.getElementById("myBtn");
@@ -53,9 +58,10 @@ $(document).ready(function(){
     });
 
   }
-
-  $('#home').click(function() {
-    location.reload();
-  });
+  //
+  // $('#home').click(function() {
+  //   location.reload();
+  //   console.log('OLOLO');
+  // });
 
 })
