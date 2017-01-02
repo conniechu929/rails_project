@@ -59,8 +59,7 @@ class UsersController < ApplicationController
 
          @randphotos = @business["photos"]
          @randphoto = @randphotos[r.rand(0..2)]
-
-
+  end
   def swipe
     if params[:like]
       session[:destination] = params[:destination]

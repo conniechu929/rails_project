@@ -1,31 +1,22 @@
 <h1 style="font: 50px Chalkduster, fantasy">Find Your Food Match</h1>
 
 <div id='foodResult'>
-    <hr>
-
-    <% if session[:business_ids] != nil%>
-    <img src="<%= @random %>" width='800px' height='800px'/>
-    <h1><%= @business["name"]%></h1>
-    <h3><%= @business["location"]["address1"]%>, <%= @business["location"]["city"]%></h3>
-    <% end %>
-    <form action="/swipe" method="post">
-
-    <div id='image' style='display:center'>
-      <% if session[:business_ids] != nil %>
-        <img style="border: 5px solid black" src="<%= @random %>" width='800px' height='800px'/>
-        <h1 style='font: 40px Jazz LET, fantasy'><b><%= @business["name"]%></h1>
-        <h3 style='font: 30px Avantgarde, sans-serif'><%= @business["location"]["city"]%></h3>
-      <% end %>
-    </div>
-    <br>
-    <form id='like-dislike' action="/swipe" method="post">
-
-      <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
-      <input type="hidden" name="destination" value="<%= @business["location"]["address1"]%><%= @business["location"]["address2"]%><%= @business["location"]["city"]%>">
-      <input type="hidden" name="discard" value="<%= @random %>">
-      <input type="hidden" name="bus_id" value="<%= @business["id"] %>">
-      <input class='dislike' type="submit" name="dislike" value="&#10060;">
-      <input class='like' type="submit" name="like" value="&#10004;">
-    </form>
-    <br>
+    <hr>
+    <div id='image' style='display:center'>
+      <% if session[:business_ids] != nil %>
+        <img style="border: 5px solid black" src="<%= @random %>" width='800px' height='800px'/>
+        <h1 style='font: 40px Jazz LET, fantasy'><b><%= @business["name"]%></h1>
+        <h3 style='font: 30px Avantgarde, sans-serif'><%= @business["location"]["city"]%></h3>
+      <% end %>
+    </div>
+    <br>
+    <form id='like-dislike' action="/swipe" method="post">
+      <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <input type="hidden" name="destination" value="<%= @business["location"]["address1"]%><%= @business["location"]["address2"]%><%= @business["location"]["city"]%>">
+      <input type="hidden" name="discard" value="<%= @random %>">
+      <input type="hidden" name="bus_id" value="<%= @business["id"] %>">
+      <input class='dislike' type="submit" name="dislike" value="&#10060;">
+      <input class='like' type="submit" name="like" value="&#10004;">
+    </form>
+    <br>
 </div>
