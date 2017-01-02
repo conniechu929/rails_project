@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def yelp
+def yelp
      location = {latitude:session[:coords][0], longitude:session[:coords][1]}
      searchterms = ['food', 'american', 'asian-fusion', 'asian', 'japanese', 'italian', 'mexican', 'chinese', 'vietnamese', 'korean', 'bbq', 'french', 'german','russian', 'indian', 'seafood']
      r = Random.new
@@ -92,9 +92,6 @@ class UsersController < ApplicationController
        redirect_to '/yelp'
      end
    end
-
-  def map
-  end
 
   def somewhere
     if session[:user_id].nil?
