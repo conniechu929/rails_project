@@ -1,45 +1,12 @@
 class UsersController < ApplicationController
-  before_action :require_login, except: [:index, :create, :login, :somewhere]
+  before_action :require_login, except: [:index, :create, :login, :locate]
   def index
     if defined?(@@discard_photos).nil?
       @@discard_photos = []
     end
   end
 
-  def create
-    @user = User.create(user_params)
-      if @user.errors.any?
-        flash[:register_errors] = []
-        @user.errors.full_messages.each do |message|
-            if flash[:register_errors].include?(message) == false
-              flash[:register_errors].push(message)
-            end
-        end
-        redirect_to :back
-      else
-        session[:user_id] = @user.id
-        redirect_to :back
-      end
-  end
-
-  def login
-    @user = User.find_by_email(params[:user][:email])
-    flash[:register_errors] = []
-    if User.find_by_email(params[:user][:email]).nil?
-      flash[:register_errors].push("Email does not exist")
-      redirect_to :back
-    else
-      if @user.authenticate(params[:user][:password]) == false
-        flash[:register_errors].push("Invalid password")
-        redirect_to :back
-      else
-        session[:user_id] = @user.id
-        redirect_to :back
-      end
-    end
-  end
-
-def yelp
+  def foodmatch
      location = {latitude:session[:coords][0], longitude:session[:coords][1]}
      searchterms = ['food', 'american', 'asian-fusion', 'asian', 'japanese', 'italian', 'mexican', 'chinese', 'vietnamese', 'korean', 'bbq', 'french', 'german','russian', 'indian', 'seafood']
      r = Random.new
@@ -89,23 +56,18 @@ def yelp
        redirect_to '/map'
      else
        @@discard_photos.push(params[:discard])
-       redirect_to '/yelp'
+       redirect_to '/foodmatch'
      end
    end
 
-  def somewhere
+  def locate
     if session[:user_id].nil?
       redirect_to '/', flash: { login: true }
     else
       session[:address] = params[:address]
       session[:coords] = Geocoder.coordinates(params[:address])
-      redirect_to '/yelp'
+      redirect_to '/foodmatch'
     end
-  end
-
-  def logout
-    reset_session
-    redirect_to "/"
   end
 
   private
