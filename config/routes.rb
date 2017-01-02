@@ -1,18 +1,13 @@
 Rails.application.routes.draw do
   get '/' => 'users#index'
-  get '/yelp' => 'users#yelp'
-  post '/yelp' => 'users#search'
-  post '/create' => 'users#create'
-  get '/' => 'users#index'
-  post '/login' => 'users#login'
-  post '/logout' => 'users#logout'
-  post '/somewhere' => 'users#somewhere'
-
-  get '/users' => 'users#index'
-
-  get '/map' => 'users#map'
-
+  post '/create' => 'sessions#create'
+  post '/login' => 'sessions#login'
+  get '/foodmatch' => 'users#foodmatch'
+  post '/locate' => 'users#locate'
   post '/swipe' => 'users#swipe'
+  get '/map' => 'users#map'
+  post '/logout' => 'sessions#logout'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
