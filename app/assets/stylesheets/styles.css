@@ -78,7 +78,7 @@ footer {
 }
 
 #image {
-  display: block;
+  display: center;
   margin-left: 20%;
 }
 
@@ -92,6 +92,14 @@ footer {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+#foodImage {
+   border: 5px solid black;
+}
+
+#title {
+  font: 40px Jazz LET, fantasy;
+  color:white;
 }
 
 .appendingImg {
@@ -110,4 +118,27 @@ footer {
   font-size: 30px;
   width: 50px;
   margin-left: 5%;
+}
+#foodTitle {
+  font: 50px Chalkduster, fantasy;
+  color:white;
+  margin-left:10px;
+}
+
+#results {
+  margin: 10px;
+  padding: 5px;
+  color: white;
+  font-family: Optima, sans-serif;
+}
+
+#resultMap {
+  position: relative;
+  width: 80%;
+  height: 700px;
+}
+
+#mapDiv {
+  margin: 10px;
+  margin-left: 20%;
 }

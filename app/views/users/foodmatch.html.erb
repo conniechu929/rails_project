@@ -1,11 +1,10 @@
-<h1 style="font: 50px Chalkduster, fantasy">Find Your Food Match</h1>
-
-  <br>
-    <div id='image' style='display:center'>
+<br>
+<h1 id='foodTitle'>Find Your Food Match</h1>
+    <div id='image'>
       <% if session[:business_ids] != nil %>
-        <img style="border: 5px solid black" src="<%= @random %>" width='800px' height='800px'/>
-        <h1 style='font: 40px Jazz LET, fantasy'><b><%= @business["name"]%></h1>
-        <h3 style='font: 30px Avantgarde, sans-serif'><%= @business["location"]["city"]%></h3>
+        <img id='foodImage' src="<%= @random %>" width='800px' height='800px'/>
+        <h1 id='title'><b><%= @business["name"]%></h1>
+        <h3 style='font: 30px Avantgarde, sans-serif;color:white;'><%= @business["location"]["city"]%></h3>
       <% end %>
     </div>
     <br>

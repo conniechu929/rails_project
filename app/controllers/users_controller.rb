@@ -1,22 +1,17 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:index, :create, :login, :locate]
-  before_action :photos_discard
+  before_action :photos_discard, only: [:index]
   def index
-    # if defined?(@@discard_photos).nil?
-    #   @@discard_photos = []
-    # end
-    # if !session[:coords].nil?
-    #   session.delete(:coords)
-    # end
-    puts "************"
-    puts "IN THE INDEX"
-    puts "************"
-    session.delete(:destination)
+    if session[:coords]
+      session.delete(:coords)
+      @@discard_photos = []
+    end
+    if session[:destination]
+      session.delete(:destination)
+    end
   end
 
   def foodmatch
-    puts 'FOODMATCH!!!!!!!!'
-    puts session[:coords]
     if session[:coords].nil?
       redirect_to '/'
     else
@@ -68,13 +63,7 @@ class UsersController < ApplicationController
        session[:bus_id] = params[:bus_id]
        redirect_to '/map'
      else
-       puts "***********"
-       puts "inside of swipe else"
-       puts "***********"
        @@discard_photos.push(params[:discard])
-       session[:dislike] = params[:dislike]
-       puts "after pushing"
-       puts session[:coords]
        redirect_to "/foodmatch/#{session[:user_id]}"
      end
    end
@@ -83,6 +72,7 @@ class UsersController < ApplicationController
      if session[:user_id].nil?
        redirect_to '/', flash: { login: true }
      else
+       session[:address] = params[:address]
        session[:coords] = Geocoder.coordinates(params[:address])
        redirect_to "/foodmatch/#{session[:user_id]}"
      end
@@ -95,7 +85,6 @@ class UsersController < ApplicationController
        @business_match = business(session[:bus_id])
      end
    end
-
 
   private
   def user_params
