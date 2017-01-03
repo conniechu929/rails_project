@@ -10,7 +10,6 @@
 /* Set gray background color and 100% height */
 .sidenav {
   padding-top: 20px;
-  background-color: #f1f1f1;
   height: 100%;
 }
 
@@ -34,8 +33,11 @@ footer {
   .row.content {height:auto;}
 }
 #mainDiv {
-  background-image: url("food3.jpg");
+  height: 550px;
 }
+/*.invisible {
+  overflow: auto;
+}*/
 
 #searchDiv {
   margin-top: 20%;
@@ -90,6 +92,12 @@ footer {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.appendingImg {
+  border: 5px solid black;
+  width: 15%;
+  height: 15%;
 }
 
 .dislike {
