@@ -1,3 +1,12 @@
+<br>
+
+<h1><%= @business_match["name"] %></h1>
+<h3><%= @business_match["location"]["address1"] %> <%= @business_match["location"]["address2"] %>, <%= @business_match["location"]["city"] %></h3>
+<h4>Rating: <%= @business_match['rating'] %>, Price: <%= @business_match["price"]%></h4>
+<h4>Phone Number: <%= @business_match['phone'] %></h4>
+<p><a href="<%= @business_match["url"] %>">Restaurant Yelp Page</a></p>
+
+
 <iframe width="700" height="500" frameborder="0" style="border:0"
  src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCQKeK4rYw0Bc4Lc_skolKTdBpcKWImXjU&origin=<%= session[:address] %>&destination=<%= session[:destination] %>&avoid=tolls|highways"
  allowfullscreen>

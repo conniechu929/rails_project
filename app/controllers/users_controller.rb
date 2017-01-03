@@ -4,9 +4,14 @@ class UsersController < ApplicationController
     if defined?(@@discard_photos).nil?
       @@discard_photos = []
     end
+    session.delete(:coords)
+    session.delete(:destination)
   end
 
   def foodmatch
+    if session[:coords].nil?
+      redirect_to '/'
+    else
      location = {latitude:session[:coords][0], longitude:session[:coords][1]}
      searchterms = ['food', 'american', 'asian-fusion', 'asian', 'japanese', 'italian', 'mexican', 'chinese', 'vietnamese', 'korean', 'bbq', 'french', 'german','russian', 'indian', 'seafood']
      r = Random.new
@@ -47,16 +52,26 @@ class UsersController < ApplicationController
        else
          @random = @randphoto
        end
+     end
     end
    end
 
    def swipe
      if params[:like]
        session[:destination] = params[:destination]
+       session[:bus_id] = params[:bus_id]
        redirect_to '/map'
      else
        @@discard_photos.push(params[:discard])
-       redirect_to '/foodmatch'
+       redirect_to "/foodmatch/#{session[:user_id]}"
+     end
+   end
+
+   def map
+     if session[:destination].nil?
+       redirect_to '/'
+     else
+       @business_match = business(session[:bus_id])
      end
    end
 
@@ -66,7 +81,7 @@ class UsersController < ApplicationController
     else
       session[:address] = params[:address]
       session[:coords] = Geocoder.coordinates(params[:address])
-      redirect_to '/foodmatch'
+      redirect_to "/foodmatch/#{session[:user_id]}"
     end
   end
 
