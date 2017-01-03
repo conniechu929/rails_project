@@ -9,6 +9,18 @@ class ApplicationController < ActionController::Base
     redirect_to '/' if session[:user_id] == nil
   end
 
+  def coords_check
+    if !session[:coords].nil?
+      session.delete(:coords)
+    end
+  end
+
+  def photos_discard
+    if defined?(@@discard_photos).nil?
+      @@discard_photos = []
+    end
+  end
+
   helper_method :current_user
   protect_from_forgery with: :exception
 end

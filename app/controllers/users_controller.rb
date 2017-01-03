@@ -1,14 +1,22 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:index, :create, :login, :locate]
+  before_action :photos_discard
   def index
-    if defined?(@@discard_photos).nil?
-      @@discard_photos = []
-    end
-    session.delete(:coords)
+    # if defined?(@@discard_photos).nil?
+    #   @@discard_photos = []
+    # end
+    # if !session[:coords].nil?
+    #   session.delete(:coords)
+    # end
+    puts "************"
+    puts "IN THE INDEX"
+    puts "************"
     session.delete(:destination)
   end
 
   def foodmatch
+    puts 'FOODMATCH!!!!!!!!'
+    puts session[:coords]
     if session[:coords].nil?
       redirect_to '/'
     else
@@ -17,7 +25,6 @@ class UsersController < ApplicationController
      r = Random.new
      term = { term: searchterms[r.rand(0...16)], categories: 'restaurants'}
 
-     if session[:coords] != nil
          @results = search(term, location)
 
          session[:business_ids] =[]
@@ -53,7 +60,6 @@ class UsersController < ApplicationController
          @random = @randphoto
        end
      end
-    end
    end
 
    def swipe
@@ -62,7 +68,22 @@ class UsersController < ApplicationController
        session[:bus_id] = params[:bus_id]
        redirect_to '/map'
      else
+       puts "***********"
+       puts "inside of swipe else"
+       puts "***********"
        @@discard_photos.push(params[:discard])
+       session[:dislike] = params[:dislike]
+       puts "after pushing"
+       puts session[:coords]
+       redirect_to "/foodmatch/#{session[:user_id]}"
+     end
+   end
+
+   def locate
+     if session[:user_id].nil?
+       redirect_to '/', flash: { login: true }
+     else
+       session[:coords] = Geocoder.coordinates(params[:address])
        redirect_to "/foodmatch/#{session[:user_id]}"
      end
    end
@@ -75,15 +96,6 @@ class UsersController < ApplicationController
      end
    end
 
-  def locate
-    if session[:user_id].nil?
-      redirect_to '/', flash: { login: true }
-    else
-      session[:address] = params[:address]
-      session[:coords] = Geocoder.coordinates(params[:address])
-      redirect_to "/foodmatch/#{session[:user_id]}"
-    end
-  end
 
   private
   def user_params
