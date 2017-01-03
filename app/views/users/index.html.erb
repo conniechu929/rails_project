@@ -6,6 +6,16 @@
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
+  $(window).load(function() {
+    for(var i=1;i<11;i++){
+      // $("#foodResult").children().addClass("imageContainer").css("background-image", "url(food_img"+i+".jpg) no-repeat;");
+      $("#foodResult").append("<img class='appendingImg' src='images/food_img"+i+".jpg'/>");
+    }
+  });
+  // $('#foodResult').fadeTo('slow', 0.3, function()
+  // {
+  //   $(this).css('background-image', 'url(' + $img + ')');
+  // }).fadeTo('slow', 1);
   </script>
 
 <div class="container-fluid text-center" id="mainDiv">

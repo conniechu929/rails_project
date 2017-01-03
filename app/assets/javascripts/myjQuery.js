@@ -20,7 +20,6 @@ $(document).ready(function(){
 
   $(document).on('click', '#home', function(){
     location.reload();
-    console.log('OLOLO');
   });
 
   if(login){
