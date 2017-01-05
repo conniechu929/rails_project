@@ -1,6 +1,7 @@
-<h1 style="font: 50px Chalkduster, fantasy">Find Your Food Match</h1>
+<body>
 
   <br>
+    <h1 style="font: 50px Chalkduster, fantasy">Find Your Food Match</h1>
     <div id='image' style='display:center'>
       <% if session[:business_ids] != nil %>
         <img style="border: 5px solid black" src="<%= @random %>" width='800px' height='800px'/>
@@ -18,3 +19,4 @@
       <input class='like' type="submit" name="like" value="&#10004;">
     </form>
     <br>
+</body>

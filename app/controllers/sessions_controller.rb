@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :require_login, except: [:index, :create, :login, :locate]
+  before_action :require_login, except: [:index, :create, :login]
 
   def create
     @user = User.create(user_params)

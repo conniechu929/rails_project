@@ -9,7 +9,10 @@
   $(window).load(function() {
     for(var i=1;i<11;i++){
       // $("#foodResult").children().addClass("imageContainer").css("background-image", "url(food_img"+i+".jpg) no-repeat;");
-      $("#foodResult").append("<img class='appendingImg' src='images/food_img"+i+".jpg'/>");
+      // $("#foodResult").append("<img class='appendingImg' src='images/food_img"+i+".jpg'/>");
+      $("#foodResult").append("<div class='appendingDiv'></div>");
+      $(this).css("background-image", "url('../images/food_img"+i+".jpg')");
+      console.log(i);
     }
   });
   // $('#foodResult').fadeTo('slow', 0.3, function()
@@ -27,11 +30,10 @@
         <% end %>
       <% end %>
     </div>
-
     <div class="col-sm-8 text-left">
       <div id="searchDiv">
-        <h3 style="font: 40px Copperplate, fantasy; color:white"><b>What's your location?</h1>
-        <form class="" action="/locate/<%= session[:user_id]%>" method="post">
+        <h3 class="h-tag"><b>What's your location?</h1>
+        <form class="" action="/locate/" method="post">
           <div class="input-group">
             <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
             <input type="text" class="form-control" id="address" name="address" placeholder="Enter Your Address">

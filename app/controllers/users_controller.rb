@@ -5,9 +5,9 @@ class UsersController < ApplicationController
     # if defined?(@@discard_photos).nil?
     #   @@discard_photos = []
     # end
-    # if !session[:coords].nil?
-    #   session.delete(:coords)
-    # end
+    if !session[:coords].nil?
+      session.delete(:coords)
+    end
     puts "************"
     puts "IN THE INDEX"
     puts "************"
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def foodmatch
     puts 'FOODMATCH!!!!!!!!'
-    puts session[:coords]
+    puts "session coords:",session[:coords]
     if session[:coords].nil?
       redirect_to '/'
     else
@@ -73,8 +73,7 @@ class UsersController < ApplicationController
        puts "***********"
        @@discard_photos.push(params[:discard])
        session[:dislike] = params[:dislike]
-       puts "after pushing"
-       puts session[:coords]
+       puts "session coords:",session[:coords]
        redirect_to "/foodmatch/#{session[:user_id]}"
      end
    end
@@ -83,6 +82,7 @@ class UsersController < ApplicationController
      if session[:user_id].nil?
        redirect_to '/', flash: { login: true }
      else
+       session[:address] = params[:address]
        session[:coords] = Geocoder.coordinates(params[:address])
        redirect_to "/foodmatch/#{session[:user_id]}"
      end
