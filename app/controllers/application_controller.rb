@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def photos_discard
+    puts "WITHIN PHOTO DISCARD"
     if defined?(@@discard_photos).nil?
       @@discard_photos = []
     end

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post '/logout' => 'sessions#logout'
   get '*path' => redirect('/404')
 
-  # get '*path' => redirect('/')
+  get '*missing' => redirect('/404')
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

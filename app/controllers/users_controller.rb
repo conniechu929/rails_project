@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:index, :create, :login, :locate]
-  before_action :photos_discard
+  before_action :photos_discard, only: [:index]
   def index
+<<<<<<< HEAD
     # if defined?(@@discard_photos).nil?
     #   @@discard_photos = []
     # end
@@ -17,6 +18,18 @@ class UsersController < ApplicationController
   def foodmatch
     puts 'FOODMATCH!!!!!!!!'
     puts "session coords:",session[:coords]
+=======
+    if session[:coords]
+      session.delete(:coords)
+      @@discard_photos = []
+    end
+    if session[:destination]
+      session.delete(:destination)
+    end
+  end
+
+  def foodmatch
+>>>>>>> 505d0a050e39c5980120a6048064fd851c61cf8f
     if session[:coords].nil?
       redirect_to '/'
     else
@@ -68,9 +81,6 @@ class UsersController < ApplicationController
        session[:bus_id] = params[:bus_id]
        redirect_to '/map'
      else
-       puts "***********"
-       puts "inside of swipe else"
-       puts "***********"
        @@discard_photos.push(params[:discard])
        session[:dislike] = params[:dislike]
        puts "session coords:",session[:coords]
@@ -95,7 +105,6 @@ class UsersController < ApplicationController
        @business_match = business(session[:bus_id])
      end
    end
-
 
   private
   def user_params
