@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   post '/create' => 'sessions#create'
   post '/login' => 'sessions#login'
   get '/foodmatch/:id' => 'users#foodmatch'
-  post '/locate' => 'users#locate'
+  post '/locate/' => 'users#locate'
   post '/swipe' => 'users#swipe'
   get '/map' => 'users#map'
   post '/logout' => 'sessions#logout'
+  get '*path' => redirect('/404')
 
   get '*missing' => redirect('/404')
 

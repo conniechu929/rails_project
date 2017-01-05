@@ -18,6 +18,10 @@ $(document).ready(function(){
     }
   });
 
+  $(document).on('click', '#logoutBtn', function(){
+    $( "#logout" ).submit();
+  });
+
   $(document).on('click', '#home', function(){
     location.reload();
   });

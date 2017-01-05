@@ -18,11 +18,10 @@
         <% end %>
       <% end %>
     </div>
-
     <div class="col-sm-8 text-left">
       <div id="searchDiv">
-        <h3 style="font: 40px Copperplate, fantasy; color:white"><b>What's your location?</h1>
-        <form class="" action="/locate" method="post">
+        <h3 class="h-tag"><b>What's your location?</h1>
+        <form class="" action="/locate/" method="post">
           <div class="input-group">
             <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
             <input type="text" class="form-control" id="address" name="address" placeholder="Enter Your Address">
