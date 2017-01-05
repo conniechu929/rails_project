@@ -2,23 +2,6 @@ class UsersController < ApplicationController
   before_action :require_login, except: [:index, :create, :login, :locate]
   before_action :photos_discard, only: [:index]
   def index
-<<<<<<< HEAD
-    # if defined?(@@discard_photos).nil?
-    #   @@discard_photos = []
-    # end
-    if !session[:coords].nil?
-      session.delete(:coords)
-    end
-    puts "************"
-    puts "IN THE INDEX"
-    puts "************"
-    session.delete(:destination)
-  end
-
-  def foodmatch
-    puts 'FOODMATCH!!!!!!!!'
-    puts "session coords:",session[:coords]
-=======
     if session[:coords]
       session.delete(:coords)
       @@discard_photos = []
@@ -29,7 +12,6 @@ class UsersController < ApplicationController
   end
 
   def foodmatch
->>>>>>> 505d0a050e39c5980120a6048064fd851c61cf8f
     if session[:coords].nil?
       redirect_to '/'
     else
@@ -82,8 +64,6 @@ class UsersController < ApplicationController
        redirect_to '/map'
      else
        @@discard_photos.push(params[:discard])
-       session[:dislike] = params[:dislike]
-       puts "session coords:",session[:coords]
        redirect_to "/foodmatch/#{session[:user_id]}"
      end
    end
