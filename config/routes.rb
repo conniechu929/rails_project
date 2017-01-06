@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/locate/' => 'users#locate'
   post '/swipe' => 'users#swipe'
   get '/map' => 'users#map'
+  get '/history/:id' => 'users#history'
   post '/logout' => 'sessions#logout'
   get '*path' => redirect('/404')
 

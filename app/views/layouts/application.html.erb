@@ -23,10 +23,11 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li><a href="/" id="home">Home</a></li>
+          <li><a href="/" id="home"><span class="glyphicon glyphicon-home"></span>Home</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
+            <li><a id="historyBtn" href="/history/<%= session[:user_id] %>"><span class="glyphicon glyphicon-heart"></span> History </a></li>
             <form id="logout" action='/logout' method='post'>
               <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
               <input type='hidden' name='id' value='<%= session[:user_id] %>'>
