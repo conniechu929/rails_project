@@ -12,7 +12,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <nav class="navbar navbar-inverse" style="background-color: red">
+  <nav class="navbar navbar-inverse" style="background: #F36D6D -webkit-gradient(linear, left top, left bottom, from(#5A0000), to(#F36D6D)) no-repeat">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -24,6 +24,7 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
           <li><a href="/" id="home"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
@@ -43,8 +44,7 @@
   <div id='foodResult'>
   <%= yield %>
   </div>
-  <footer class="container-fluid text-center">
-    <p>OLOLO</p>
+  <footer class="container-fluid text-center" style="background: #F36D6D -webkit-gradient(linear, left top, left bottom, from(#5A0000), to(#F36D6D)) no-repeat">
   </footer>
 
 
@@ -53,7 +53,7 @@
     <div id="myModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Please Login/Register before proceed</h2>
+        <h2>Please Login/Register</h2>
         <form class='form-horizontal' action='/login' method='post' id="loginform">
             <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
 

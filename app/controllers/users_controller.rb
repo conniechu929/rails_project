@@ -61,10 +61,17 @@ class UsersController < ApplicationController
      if params[:like]
        session[:destination] = params[:destination]
        session[:bus_id] = params[:bus_id]
+       Place.create(business:params[:business], address:params[:address], city:params[:city], state:params[:state], user_id:session[:user_id])
        redirect_to '/map'
      else
        @@discard_photos.push(params[:discard])
        redirect_to "/foodmatch/#{session[:user_id]}"
+     end
+   end
+
+   def history
+     if session[:user_id] == params[:user_id]
+       @places = Place.where(user_id:session[:user_id])
      end
    end
 
