@@ -36,7 +36,7 @@ GEM
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
     arel (5.0.1.20140414130214)
-    autoprefixer-rails (6.6.0)
+    autoprefixer-rails (6.6.1)
       execjs
     bcrypt (3.1.11)
     bootstrap-sass (3.3.7)
@@ -96,9 +96,8 @@ GEM
     minitest (5.10.1)
     multi_json (1.12.1)
     multipart-post (2.0.0)
-    nokogiri (1.7.0)
+    nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
-    oj (2.18.0)
     pg (0.19.0)
     public_suffix (2.0.5)
     rack (1.5.5)
@@ -196,8 +195,6 @@ DEPENDENCIES
   http
   jbuilder (~> 2.0)
   jquery-rails
-  multi_json (~> 1.11)
-  oj
   pg
   rails (= 4.1.8)
   rails-footnotes (>= 4.0.0, < 5)
