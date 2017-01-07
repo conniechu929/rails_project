@@ -26,6 +26,28 @@ $(document).ready(function(){
     location.reload();
   });
 
+  $(document).on('click', '.placeAnker', function(){
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = function(){
+      $(".modal").fadeIn();
+      // modal.style.display = "block";
+    }
+
+    span.onclick = function(){
+      $(".modal").fadeOut();
+    }
+
+    window.onclick = function(event){
+      if(event.target == modal){
+        $(".modal").fadeOut();
+      }
+    }
+    $( "#myBtn" ).trigger( "click" );
+  });
+
   if(login){
     var modal = document.getElementById("myModal");
     var btn = document.getElementById("myBtn");
@@ -61,10 +83,4 @@ $(document).ready(function(){
     });
 
   }
-  //
-  // $('#home').click(function() {
-  //   location.reload();
-  //   console.log('OLOLO');
-  // });
-
 })
