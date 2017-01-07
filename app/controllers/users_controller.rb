@@ -70,9 +70,17 @@ class UsersController < ApplicationController
    end
 
    def history
-     if session[:user_id] == params[:user_id]
-       @places = Place.where(user_id:session[:user_id])
-     end
+     puts "************"
+     puts "PARAMS ID: ",params[:id]
+     puts "SESSION ID: ",session[:user_id]
+     puts "************"
+     if params[:id].to_i == session[:user_id].to_i
+       if !Place.exists?(1)
+         flash[:history_error] = "Your History is empty"
+       else
+         @places = Place.where(user_id:session[:user_id])
+       end
+    end
    end
 
    def locate
