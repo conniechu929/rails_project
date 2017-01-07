@@ -61,7 +61,12 @@ class UsersController < ApplicationController
      if params[:like]
        session[:destination] = params[:destination]
        session[:bus_id] = params[:bus_id]
-       Place.create(business:params[:business], address:params[:address], city:params[:city], state:params[:state], user_id:session[:user_id])
+       if place_check.blank?
+         @place = Place.create(fave_params)
+         Favorite.create(user_id:session[:user_id], place_id:@place["id"])
+       else
+         Favorite.create(user_id:session[:user_id], place_id:@place["id"])
+       end
        redirect_to '/map'
      else
        @@discard_photos.push(params[:discard])
@@ -69,9 +74,9 @@ class UsersController < ApplicationController
      end
    end
 
-   def history
+   def favorites
      if session[:user_id] == params[:user_id]
-       @places = Place.where(user_id:session[:user_id])
+       @favorites = Favorite.where(user_id:session[:user_id])
      end
    end
 
@@ -97,5 +102,10 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
-
+  def fave_params
+    params.require(:fave).permit(:business, :address, :city, :state)
+  end
+  def place_check
+    @place = Place.find_by_address_and_city_and_state(params[:address], params[:city], params[:state])
+  end
 end

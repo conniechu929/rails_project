@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   # attr_accessible :address, :latitude, :longitude
-  has_many :places
-  
+  has_many :favorites
+  has_many :comments, through: :favorites
+
   has_secure_password
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?

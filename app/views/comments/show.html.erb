@@ -1,0 +1,11 @@
+<body>
+  <h1></h1>
+  <h3></h3>
+  <form class="" action="/comments/create" method="post">
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type="hidden" name="id" value="">
+    <label for="content">Comment: </label>
+    <input type="text" name="content">
+    <input type="submit" value="Add comment">
+  </form>
+</body>

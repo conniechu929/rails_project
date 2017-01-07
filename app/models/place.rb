@@ -1,5 +1,6 @@
 class Place < ActiveRecord::Base
-  belongs_to :user
+  has_many :favorites
+  has_many :comments, through: :favorites
 
   validates :business, :address, :city, :state, presence: true
 end

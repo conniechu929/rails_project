@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'comments/index'
+
   get '/' => 'users#index'
   post '/create' => 'sessions#create'
   post '/login' => 'sessions#login'
@@ -7,7 +9,9 @@ Rails.application.routes.draw do
   post '/locate/' => 'users#locate'
   post '/swipe' => 'users#swipe'
   get '/map' => 'users#map'
-  get '/history/:id' => 'users#history'
+  get '/favorites/:id' => 'users#favorites'
+  post '/comments/create' => 'comments#create'
+
   post '/logout' => 'sessions#logout'
   get '*path' => redirect('/404')
 
