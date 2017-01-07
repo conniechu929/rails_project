@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post '/swipe' => 'users#swipe'
   get '/map' => 'users#map'
   get '/favorites/:id' => 'users#favorites'
+  get '/comments/:id' => 'comments#show'
   post '/comments/create' => 'comments#create'
 
   post '/logout' => 'sessions#logout'

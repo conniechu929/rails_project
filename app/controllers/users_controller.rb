@@ -74,10 +74,11 @@ class UsersController < ApplicationController
      end
    end
 
-   def favorites
-     if session[:user_id] == params[:user_id]
-       @favorites = Favorite.where(user_id:session[:user_id])
-     end
+  def favorites
+    if params[:id].to_i == session[:user_id].to_i
+        @favorites = Favorite.where(user_id:session[:user_id])
+    end
+  end
 
   #  def history
   #    puts "************"

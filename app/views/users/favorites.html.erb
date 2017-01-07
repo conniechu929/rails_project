@@ -1,22 +1,22 @@
 <body>
   <br>
   <div id="historyDiv">
-    <h1 class="headerFont">Like History</h1>
+    <h1 class="headerFont">Favorites List</h1>
     <% if flash[:history_error] %>
       <p class="alert"><%= flash[:history_error] %></p>
     <% else %>
-      <% @places.each do |place| %>
-        <h3><%= place["business"] %></h3>
-        <h3><%= place["created_at"] %></h3>
+      <% @favorites.each do |favorite| %>
+        <h3><%= favorite.place.business %></h3>
+        <h3><%= favorite["created_at"] %></h3>
         <a class="placeAnker">See on Map</a>
-          <a href="/places/<%= place['id'] %>">Comments</a>
+          <a href="/comments/<%= favorite.id %>">Comments</a>
 
         <button hidden id="myBtn">Open Button</button>
         <div id="myModal" class="modal">
           <div class="modal-content">
             <span class="close">&times;</span>
             <iframe width="100%" height="90%" frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDBvzq5WsidARhAZ0821MB1iAMTPnHiamI&q=<%= place["address"] %> <%= place["city"] %> <%= place["state"] %>" allowfullscreen>
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDBvzq5WsidARhAZ0821MB1iAMTPnHiamI&q=<%= favorite.place.address %> <%= favorite.place.city %> <%= favorite.place.state %>" allowfullscreen>
           </div>
         </div>
 

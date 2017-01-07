@@ -180,3 +180,7 @@ footer {
   font: 50px Chalkduster, fantasy;
   color:white;
 }
+
+#comments {
+  overflow-y: auto;
+}

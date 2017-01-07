@@ -15,10 +15,10 @@
       <input type='hidden'  name='authenticity_token' value='<%= form_authenticity_token %>'>
       <input type="hidden" name="destination" value="<%= @business["location"]["address1"]%><%= @business["location"]["address2"]%><%= @business["location"]["city"]%>">
       <input type="hidden" name="bus_id" value="<%= @business["id"] %>">
-      <input type="hidden" name="business" value="<%= @business["name"] %>">
-      <input type="hidden" name="address" value="<%= @business["location"]["address1"]%><%= @business["location"]["address2"]%>">
-      <input type="hidden" name="city" value="<%= @business["location"]["city"]%>">
-      <input type="hidden" name="state" value="<%= @business["location"]["state"] %>">
+      <input type="hidden" name="fave[business]" value="<%= @business["name"] %>">
+      <input type="hidden" name="fave[address]" value="<%= @business["location"]["address1"]%><%= @business["location"]["address2"]%>">
+      <input type="hidden" name="fave[city]" value="<%= @business["location"]["city"]%>">
+      <input type="hidden" name="fave[state]" value="<%= @business["location"]["state"] %>">
       <input type="hidden" name="discard" value="<%= @random %>">
       <input class='dislike' type="submit" name="dislike" value="&#10060;">
       <input class='like' type="submit" name="like" value="&#10004;">
