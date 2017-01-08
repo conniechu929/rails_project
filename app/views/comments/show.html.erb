@@ -1,14 +1,16 @@
-<body>
+<div class='contentDiv'>
+  <br>
   <h1><%= @favorite.place.business %></h1>
   <h3><%= @favorite.place.address %></h3>
   <hr>
   <div id='comments'>
   <% if @comments != nil %>
     <% @comments.each do |comment| %>
-      <p><%= comment.content %></p>
+      <h4><%= @user.name %>: <%= comment.content %></h4>
+      <p class="commentDate"> <%= comment.created_at.strftime("%l:%M %p, %d %b. %Y") %> </p>
     <% end %>
   <% end %>
-</div>
+  </div>
   <hr>
   <form class="" action="/comments/create" method="post">
     <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
@@ -17,4 +19,5 @@
     <input type="text" name="content">
     <input type="submit" value="Add comment">
   </form>
+</div>
 </body>

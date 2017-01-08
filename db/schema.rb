@@ -40,9 +40,12 @@ ActiveRecord::Schema.define(version: 20170107001904) do
     t.string   "address"
     t.string   "city"
     t.string   "state"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "places", ["user_id"], name: "index_places_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

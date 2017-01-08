@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
 
   def show
     @favorite = Favorite.find_by_id(params[:id])
+    @user = User.find_by_id(session[:user_id])
     @comments = Comment.where(favorite_id:params[:id])
   end
 end

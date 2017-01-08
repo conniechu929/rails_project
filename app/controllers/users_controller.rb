@@ -77,6 +77,11 @@ class UsersController < ApplicationController
   def favorites
     if params[:id].to_i == session[:user_id].to_i
         @favorites = Favorite.where(user_id:session[:user_id])
+        puts "*****************"
+        puts @favorites
+        puts "*****************"
+    else
+      redirect_to "/favorites/#{session[:user_id]}"
     end
   end
 

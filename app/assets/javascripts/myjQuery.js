@@ -27,6 +27,9 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '.placeAnker', function(){
+    var address = $(this).siblings('input').val();
+    var source = "https://www.google.com/maps/embed/v1/place?key=AIzaSyDBvzq5WsidARhAZ0821MB1iAMTPnHiamI&q="+ address +"";
+    $("iframe").attr("src", source);
     var modal = document.getElementById("myModal");
     var btn = document.getElementById("myBtn");
     var span = document.getElementsByClassName("close")[0];
@@ -45,6 +48,14 @@ $(document).ready(function(){
         $(".modal").fadeOut();
       }
     }
+
+    $(document).keydown(function(e) {
+    // ESCAPE key pressed
+      if (e.keyCode == 27) {
+          $(".modal").fadeOut();
+      }
+    })
+
     $( "#myBtn" ).trigger( "click" );
   });
 

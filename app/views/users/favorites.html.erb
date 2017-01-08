@@ -1,28 +1,28 @@
-<body>
-  <br>
-  <div id="historyDiv">
-    <h1 class="headerFont">Favorites List</h1>
-    <% if flash[:history_error] %>
-      <p class="alert"><%= flash[:history_error] %></p>
-    <% else %>
-      <% @favorites.each do |favorite| %>
-        <h3><%= favorite.place.business %></h3>
-        <h3><%= favorite["created_at"] %></h3>
-        <a class="placeAnker">See on Map</a>
-          <a href="/comments/<%= favorite.id %>">Comments</a>
-
-        <button hidden id="myBtn">Open Button</button>
-        <div id="myModal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <iframe width="100%" height="90%" frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDBvzq5WsidARhAZ0821MB1iAMTPnHiamI&q=<%= favorite.place.address %> <%= favorite.place.city %> <%= favorite.place.state %>" allowfullscreen>
-          </div>
-        </div>
-
+<br>
+<div class="contentDiv">
+  <h1 class="headerFont">Favorites List</h1>
+  <% if flash[:history_error] %>
+    <p class="alert"><%= flash[:history_error] %></p>
+  <% else %>
+    <% @favorites.each do |favorite| %>
+    <div class="content">
+      <h3><%= favorite.place.business %></h3>
+      <h4>Liked on: <%= favorite.created_at.strftime("%d %b. %Y") %></h4>
+      <input type='hidden' name='address' value='<%= favorite.place.address %> <%= favorite.place.city %> <%= favorite.place.state %>'>
+      <a class="placeAnker">See on Map</a>
+      <a href="/comments/<%= favorite.id %>">Comments</a>
+    </div>
     <% end %>
   <% end %>
-
+</div>
+<div id="appendDiv">
+  <button hidden id="myBtn">Open Button</button>
+<div id="myModal" class="modal">
+  <div class="modal-map">
+    <span class="close">&times;</span>
+    <iframe width="100%" height="95%" frameborder="0" style="border:0"
+src='' allowfullscreen>
   </div>
-  <br>
-</body>
+</div>
+</div>
+<br>
