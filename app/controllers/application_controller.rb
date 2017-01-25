@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
   end
 
   def coords_check
-    if !session[:coords].nil?
-      session.delete(:coords)
+    if session[:coords].nil?
+      redirect_to '/'
     end
   end
 
