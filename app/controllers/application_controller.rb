@@ -10,13 +10,12 @@ class ApplicationController < ActionController::Base
   end
 
   def coords_check
-    if !session[:coords].nil?
-      session.delete(:coords)
+    if session[:coords].nil?
+      redirect_to '/'
     end
   end
 
   def photos_discard
-    puts "WITHIN PHOTO DISCARD"
     if defined?(@@discard_photos).nil?
       @@discard_photos = []
     end
