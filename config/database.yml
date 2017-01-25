@@ -20,7 +20,7 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
-
+  username: ubuntu
 development:
   <<: *default
   database: rails_project_development
@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: rails_project_production
-  username: rails_project
+  # username: rails_project
   password: <%= ENV['RAILS_PROJECT_DATABASE_PASSWORD'] %>
