@@ -24,7 +24,7 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
           <li><a href="/" id="home"><span class="glyphicon glyphicon-home"></span>Home</a></li>
-
+          <li><a href="/about"><span class="glyphicon glyphicon-about"></span>About</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
@@ -46,7 +46,6 @@
   </div>
   <footer class="container-fluid text-center" style="background: #F36D6D -webkit-gradient(linear, left top, left bottom, from(#5A0000), to(#F36D6D)) no-repeat">
   </footer>
-
 
   <% if flash[:login] %>
     <button hidden id="myBtn">Open Button</button>

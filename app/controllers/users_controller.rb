@@ -1,14 +1,16 @@
 class UsersController < ApplicationController
-  before_action :require_login, except: [:index, :create, :login, :locate]
-  before_action :photos_discard, only: [:index]
+  before_action :require_login, except: [:index, :create, :login, :locate, :about]
+  before_action :photos_discard, only: [:foodmatch]
   def index
     if session[:coords]
       session.delete(:coords)
-      @@discard_photos = []
     end
     if session[:destination]
       session.delete(:destination)
     end
+  end
+
+  def about
   end
 
   def foodmatch
@@ -20,19 +22,24 @@ class UsersController < ApplicationController
      r = Random.new
      term = { term: searchterms[r.rand(0...16)], categories: 'restaurants'}
 
-         @results = search(term, location)
+     @results = search(term, location)
 
-         session[:business_ids] =[]
-         @results["businesses"].each do |result|
-           session[:business_ids].push(result["id"])
-         end
+     session[:business_ids] = []
 
-         randomBusId = session[:business_ids][r.rand(0...5)]
+     @results["businesses"].each do |result|
+       session[:business_ids].push(result["id"])
+     end
 
-         @business = business(randomBusId)
+     randomBusId = session[:business_ids][r.rand(0...5)]
 
-         @randphotos = @business["photos"]
-         @randphoto = @randphotos[r.rand(0..2)]
+     @business = business(randomBusId)
+
+     @randphotos = @business["photos"]
+     if @randphotos.nil?
+       foodmatch
+     else
+       @randphoto = @randphotos[r.rand(0..2)]
+     end
 
        if @@discard_photos.include?(@randphoto)
          newrandphoto = @randphotos[r.rand(0..2)]
@@ -49,13 +56,18 @@ class UsersController < ApplicationController
             randomBusId = session[:business_ids][r.rand(0...5)]
             @business = business(randomBusId)
             @randphotos = @business["photos"]
-            @random = @randphotos[r.rand(0..2)]
+            if @randphotos.nil?
+              foodmatch
+            else
+              @random = @randphotos[r.rand(0..2)]
+            end
          end
        else
          @random = @randphoto
        end
      end
    end
+
 
    def swipe
      if params[:like]
@@ -77,27 +89,10 @@ class UsersController < ApplicationController
   def favorites
     if params[:id].to_i == session[:user_id].to_i
         @favorites = Favorite.where(user_id:session[:user_id])
-        puts "*****************"
-        puts @favorites
-        puts "*****************"
     else
       redirect_to "/favorites/#{session[:user_id]}"
     end
   end
-
-  #  def history
-  #    puts "************"
-  #    puts "PARAMS ID: ",params[:id]
-  #    puts "SESSION ID: ",session[:user_id]
-  #    puts "************"
-  #    if params[:id].to_i == session[:user_id].to_i
-  #      if !Place.exists?(1)
-  #        flash[:history_error] = "Your History is empty"
-  #      else
-  #        @places = Place.where(user_id:session[:user_id])
-  #      end
-  #   end
-  #  end
 
    def locate
      if session[:user_id].nil?
